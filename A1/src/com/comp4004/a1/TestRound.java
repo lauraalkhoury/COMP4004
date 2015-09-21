@@ -10,43 +10,43 @@ public class TestRound extends TestCase {
 	  super(name);
 	}
 	
-	public void setUp(int num_players) {
-		r = Round.initRound(num_players);
+	public void setUp(int numPlayers) {
+		r = Round.initRound(numPlayers);
 	}
 	
 	public void testSetNumPlayers() {
-		int num_players = 3;
-		setUp(num_players);
-		assertEquals(num_players, r.getNumPlayers());
+		int numPlayers = 3;
+		setUp(numPlayers);
+		assertEquals(numPlayers, r.getNumPlayers());
 	}
 	
 	public void testLowerPlayerLimit() {
-		int num_players = 1;
-		setUp(num_players);
-		// initRound should return null if num_players less than 2
+		int numPlayers = 1;
+		setUp(numPlayers);
+		// initRound should return null if numPlayers less than 2
 		assertEquals(null, r);
 	}
 	
 	public void testUpperPlayerLimit() {
-		int num_players = 5;
-		setUp(num_players);
+		int numPlayers = 5;
+		setUp(numPlayers);
 		
-		// initRound should return null if num_players greater than 4
+		// initRound should return null if numPlayers greater than 4
 		assertEquals(null, r);
 	}
 	
 	public void testPlayerIDArrSize() {
-		int num_players = 4;
-		setUp(num_players);
+		int numPlayers = 4;
+		setUp(numPlayers);
 		
-		assertEquals(num_players, r.playerIDs.length);
+		assertEquals(numPlayers, r.playerIDs.length);
 	}
 	
 	public void testPlayerHandArrSize() {
-		int num_players = 4;
-		setUp(num_players);
+		int numPlayers = 4;
+		setUp(numPlayers);
 		
-		assertEquals(num_players, r.playerHands.length);
+		assertEquals(numPlayers, r.playerHands.length);
 	}
 
 }
