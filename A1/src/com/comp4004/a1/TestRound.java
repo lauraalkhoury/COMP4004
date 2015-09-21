@@ -50,14 +50,14 @@ public class TestRound extends TestCase {
 		assertEquals(0, r.playerHands.size());
 	}
 	
-	public void testAddHand() {
+	public void testAddEmptyHand() {
 		int numPlayers = 4;
 		setUp(numPlayers);
 		
 		String hand = "";
 		r.addHand(hand);
 		
-		assertEquals(true, r.playerHands.contains(hand));
+		assertEquals(false, r.playerHands.contains(hand));
 	}
 
 }

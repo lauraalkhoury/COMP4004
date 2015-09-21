@@ -39,7 +39,15 @@ public class Round {
 	}
 	
 	public void addHand(String hand) {
-		playerHands.add(hand);
+		// only add hand to round if it is valid
+		if(handIsValid(hand))
+			playerHands.add(hand);
 	}
 	
+	public boolean handIsValid(String hand) {
+		if(hand.isEmpty())
+			return false;
+		else
+			return true;
+	}
 }
