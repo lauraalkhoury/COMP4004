@@ -12,7 +12,7 @@ public class Round {
 		numPlayers = p;
 		
 		// allocate array of player IDs
-		playerIDs = new Vector(numPlayers);
+		playerIDs = new Vector<Integer>(numPlayers);
 		
 		// assign playerID for each player
 		for(int i = 0; i < numPlayers; ++i) {
@@ -21,7 +21,7 @@ public class Round {
 		
 		// allocate vector of player hands with max size numPlayers
 		// actual size is 0 upon initialization
-		playerHands = new Vector(numPlayers);
+		playerHands = new Vector<String>(numPlayers);
 	}
 	
 	public static Round initRound(int p) {
