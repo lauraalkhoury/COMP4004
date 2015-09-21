@@ -1,9 +1,11 @@
 package com.comp4004.a1;
 
+import java.util.Vector;
+
 public class Round {
 	int      numPlayers;
 	int[]    playerIDs;
-	String[] playerHands;
+	Vector<String> playerHands;
 	
 	private Round(int p) {
 		// set number of players for this round
@@ -17,8 +19,9 @@ public class Round {
 			playerIDs[i] = i+1;
 		}
 		
-		// allocate array of player hands
-		playerHands = new String[numPlayers];
+		// allocate vector of player hands with max size numPlayers
+		// actual size is 0 upon initialization
+		playerHands = new Vector(numPlayers);
 	}
 	
 	public static Round initRound(int p) {
@@ -34,4 +37,5 @@ public class Round {
 	public int getNumPlayers() {
 		return numPlayers;
 	}
+	
 }

@@ -42,11 +42,11 @@ public class TestRound extends TestCase {
 		assertEquals(numPlayers, r.playerIDs.length);
 	}
 	
-	public void testPlayerHandArrSize() {
+	public void testInitialPlayerHandArrSize() {
 		int numPlayers = 4;
 		setUp(numPlayers);
 		
-		assertEquals(numPlayers, r.playerHands.length);
+		assertEquals(0, r.playerHands.size());
 	}
 
 }
