@@ -29,6 +29,13 @@ public class TestRound extends TestCase {
 		// initRound should return null if num_players greater than 4
 		assertEquals(null, r);
 	}
+	
+	public void testPlayerArrSize() {
+		int num_players = 4;
+		Round r = Round.initRound(num_players);
+		
+		assertEquals(num_players, r.playerIDs.length);
+	}
 
 }
 
