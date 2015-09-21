@@ -8,8 +8,13 @@ public class Round {
 	}
 	
 	public static Round initRound(int p) {
-		Round r = new Round(p);
-		return r;
+		if(p < 2) {
+			return null;
+		}
+		else {
+			Round r = new Round(p);
+			return r;
+		}
 	}
 	
 	public int getNumPlayers() {

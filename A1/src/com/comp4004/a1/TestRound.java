@@ -13,6 +13,14 @@ public class TestRound extends TestCase {
 		Round r = Round.initRound(num_players);
 		assertEquals(num_players, r.getNumPlayers());
 	}
+	
+	public void testLowerPlayerLimit() {
+		int num_players = 1;
+		Round r = Round.initRound(num_players);
+		
+		// initRound should return null if num_players less than 2
+		assertEquals(null, r);
+	}
 
 }
 
