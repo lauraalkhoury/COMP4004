@@ -3,8 +3,13 @@ package com.comp4004.a1;
 public class Round {
 	int num_players;
 	
-	public Round(int p) {
+	private Round(int p) {
 		num_players = p; // set number of players for this round
+	}
+	
+	public static Round initRound(int p) {
+		Round r = new Round(p);
+		return r;
 	}
 	
 	public int getNumPlayers() {

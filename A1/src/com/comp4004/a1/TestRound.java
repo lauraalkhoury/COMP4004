@@ -10,8 +10,8 @@ public class TestRound extends TestCase {
 	
 	public void testSetNumPlayers() {
 		int num_players = 5;
-		Round r = new Round(num_players);
-		assertEquals(num_players, r.getNumPlayers() );
+		Round r = Round.initRound(num_players);
+		assertEquals(num_players, r.getNumPlayers());
 	}
 
 }
