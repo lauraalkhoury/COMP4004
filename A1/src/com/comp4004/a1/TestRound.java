@@ -81,6 +81,17 @@ public class TestRound extends TestCase {
 		
 		assertEquals(false, r.playerHands.contains(hand));
 	}
+	
+	public void testAddHandWithTooManyCards() {
+		int numPlayers = 4;
+		setUp(numPlayers);
+		
+		// too many cards to be a valid hand
+		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds AceDiamonds";
+		r.addHand(hand);
+		
+		assertEquals(false, r.playerHands.contains(hand));
+	}
 
 }
 
