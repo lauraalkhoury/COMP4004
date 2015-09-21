@@ -23,6 +23,7 @@ public class TestRound extends TestCase {
 	public void testLowerPlayerLimit() {
 		int numPlayers = 1;
 		setUp(numPlayers);
+		
 		// initRound should return null if numPlayers less than 2
 		assertEquals(null, r);
 	}
@@ -47,6 +48,16 @@ public class TestRound extends TestCase {
 		setUp(numPlayers);
 		
 		assertEquals(0, r.playerHands.size());
+	}
+	
+	public void testAddHand() {
+		int numPlayers = 4;
+		setUp(numPlayers);
+		
+		String hand = "";
+		r.addHand(hand);
+		
+		assertEquals(true, r.playerHands.contains(hand));
 	}
 
 }

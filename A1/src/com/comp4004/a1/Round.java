@@ -38,4 +38,8 @@ public class Round {
 		return numPlayers;
 	}
 	
+	public void addHand(String hand) {
+		playerHands.add(hand);
+	}
+	
 }
