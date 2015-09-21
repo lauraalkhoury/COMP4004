@@ -3,20 +3,20 @@ package com.comp4004.a1;
 import java.util.Vector;
 
 public class Round {
-	int      numPlayers;
-	int[]    playerIDs;
-	Vector<String> playerHands;
+	int             numPlayers;
+	Vector<Integer> playerIDs;
+	Vector<String>  playerHands;
 	
 	private Round(int p) {
 		// set number of players for this round
 		numPlayers = p;
 		
 		// allocate array of player IDs
-		playerIDs = new int[numPlayers];
+		playerIDs = new Vector(numPlayers);
 		
 		// assign playerID for each player
 		for(int i = 0; i < numPlayers; ++i) {
-			playerIDs[i] = i+1;
+			playerIDs.add(i+1);
 		}
 		
 		// allocate vector of player hands with max size numPlayers
@@ -52,8 +52,8 @@ public class Round {
 		int playerID = (int)hand.charAt(0);
 		
 		boolean containsID = false;
-		for(int i = 0; i < playerIDs.length; ++i) {
-			if(playerIDs[i] == playerID)
+		for(int i = 0; i < playerIDs.size(); ++i) {
+			if(playerIDs.elementAt(i) == playerID)
 				containsID = true;
 		}
 		if(!containsID)

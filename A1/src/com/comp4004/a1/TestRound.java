@@ -40,7 +40,7 @@ public class TestRound extends TestCase {
 		int numPlayers = 4;
 		setUp(numPlayers);
 		
-		assertEquals(numPlayers, r.playerIDs.length);
+		assertEquals(numPlayers, r.playerIDs.size());
 	}
 	
 	public void testInitialPlayerHandArrSize() {
