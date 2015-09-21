@@ -47,6 +47,17 @@ public class Round {
 	public boolean handIsValid(String hand) {
 		if(hand.isEmpty())
 			return false;
+		
+		// get player ID from hand string
+		int playerID = (int)hand.charAt(0);
+		
+		boolean containsID = false;
+		for(int i = 0; i < playerIDs.length; ++i) {
+			if(playerIDs[i] == playerID)
+				containsID = true;
+		}
+		if(!containsID)
+			return false;
 		else
 			return true;
 	}
