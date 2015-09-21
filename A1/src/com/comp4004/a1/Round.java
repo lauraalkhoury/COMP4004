@@ -47,13 +47,25 @@ public class Round {
 	public boolean handIsValid(String hand) {
 		if(hand.isEmpty())
 			return false;
+		System.out.println(hand);
+		String[] splitHand = new String[6];
+		//String hand2 = "8 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds";
+		splitHand = hand.split("\\s");
 		
-		// get player ID from hand string
-		int playerID = (int)hand.charAt(0);
+		System.out.println(splitHand[1]);
 		
-		if(!playerIDs.contains(playerID))
+		// get player ID from hand array
+		int playerID = Integer.parseInt(splitHand[0]);
+		
+		if(!playerIDs.contains(playerID)) {
+			System.out.println("playerIDs does not contain ID " + playerID);
 			return false;
-		else
-			return true;
+		}
+
+		// check number of cards is valid
+		if((splitHand.length - 1) != 5)
+			return false;
+		
+		return true;
 	}
 }

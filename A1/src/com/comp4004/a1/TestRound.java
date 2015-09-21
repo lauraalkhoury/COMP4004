@@ -60,12 +60,23 @@ public class TestRound extends TestCase {
 		assertEquals(false, r.playerHands.contains(hand));
 	}
 	
-	public void testAddInvalidPlayerHand() {
+	public void testAddHandWithInvalidPlayerID() {
 		int numPlayers = 4;
 		setUp(numPlayers);
 		
 		// 8 is an invalid player ID
 		String hand = "8 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds";
+		r.addHand(hand);
+		
+		assertEquals(false, r.playerHands.contains(hand));
+	}
+	
+	public void testAddHandWithTooFewCards() {
+		int numPlayers = 4;
+		setUp(numPlayers);
+		
+		// not enough cards to be a valid hand
+		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades";
 		r.addHand(hand);
 		
 		assertEquals(false, r.playerHands.contains(hand));
