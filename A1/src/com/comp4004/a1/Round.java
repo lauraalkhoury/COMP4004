@@ -51,12 +51,7 @@ public class Round {
 		// get player ID from hand string
 		int playerID = (int)hand.charAt(0);
 		
-		boolean containsID = false;
-		for(int i = 0; i < playerIDs.size(); ++i) {
-			if(playerIDs.elementAt(i) == playerID)
-				containsID = true;
-		}
-		if(!containsID)
+		if(!playerIDs.contains(playerID))
 			return false;
 		else
 			return true;
