@@ -48,8 +48,7 @@ public class Round {
 		if(hand.isEmpty())
 			return false;
 
-		String[] splitHand = new String[6];
-		splitHand = hand.split("\\s");
+		String[] splitHand = hand.split("\\s");
 		
 		// get player ID from hand array
 		int playerID = Integer.parseInt(splitHand[0]);
