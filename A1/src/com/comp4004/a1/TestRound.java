@@ -9,7 +9,7 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testSetNumPlayers() {
-		int num_players = 5;
+		int num_players = 3;
 		Round r = Round.initRound(num_players);
 		assertEquals(num_players, r.getNumPlayers());
 	}
@@ -19,6 +19,14 @@ public class TestRound extends TestCase {
 		Round r = Round.initRound(num_players);
 		
 		// initRound should return null if num_players less than 2
+		assertEquals(null, r);
+	}
+	
+	public void testUpperPlayerLimit() {
+		int num_players = 5;
+		Round r = Round.initRound(num_players);
+		
+		// initRound should return null if num_players greater than 4
 		assertEquals(null, r);
 	}
 

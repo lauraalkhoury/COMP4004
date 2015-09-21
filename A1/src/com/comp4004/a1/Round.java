@@ -8,7 +8,7 @@ public class Round {
 	}
 	
 	public static Round initRound(int p) {
-		if(p < 2) {
+		if(p < 2 || p > 4) {
 			return null;
 		}
 		else {
