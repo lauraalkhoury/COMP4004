@@ -35,11 +35,18 @@ public class TestRound extends TestCase {
 		assertEquals(null, r);
 	}
 	
-	public void testPlayerArrSize() {
+	public void testPlayerIDArrSize() {
 		int num_players = 4;
 		setUp(num_players);
 		
 		assertEquals(num_players, r.playerIDs.length);
+	}
+	
+	public void testPlayerHandArrSize() {
+		int num_players = 4;
+		setUp(num_players);
+		
+		assertEquals(num_players, r.playerHands.length);
 	}
 
 }
