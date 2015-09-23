@@ -36,18 +36,18 @@ public class TestRound extends TestCase {
 		assertEquals(null, r);
 	}
 	
-	public void testPlayerIDArrSize() {
-		int numPlayers = 4;
-		setUp(numPlayers);
-		
-		assertEquals(numPlayers, r.playerIDs.size());
-	}
+//	public void testPlayerIDArrSize() {
+//		int numPlayers = 4;
+//		setUp(numPlayers);
+//		
+//		assertEquals(numPlayers, r.playerIDs.size());
+//	}
 	
-	public void testInitialPlayerHandArrSize() {
+	public void testInitialNumHands() {
 		int numPlayers = 4;
 		setUp(numPlayers);
 		
-		assertEquals(0, r.playerHands.size());
+		assertEquals(0, r.hands.size());
 	}
 	
 	public void testAddEmptyHand() {
@@ -57,7 +57,7 @@ public class TestRound extends TestCase {
 		String hand = "";
 		r.addHand(hand);
 		
-		assertEquals(false, r.playerHands.contains(hand));
+		assertEquals(false, r.hands.containsValue(hand));
 	}
 	
 	public void testAddHandWithInvalidPlayerID() {
@@ -68,7 +68,7 @@ public class TestRound extends TestCase {
 		String hand = "8 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds";
 		r.addHand(hand);
 		
-		assertEquals(false, r.playerHands.contains(hand));
+		assertEquals(false, r.hands.containsValue(hand));
 	}
 	
 	public void testAddHandWithTooFewCards() {
@@ -79,7 +79,7 @@ public class TestRound extends TestCase {
 		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades";
 		r.addHand(hand);
 		
-		assertEquals(false, r.playerHands.contains(hand));
+		assertEquals(false, r.hands.containsValue(hand));
 	}
 	
 	public void testAddHandWithTooManyCards() {
@@ -90,7 +90,7 @@ public class TestRound extends TestCase {
 		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds AceDiamonds";
 		r.addHand(hand);
 		
-		assertEquals(false, r.playerHands.contains(hand));
+		assertEquals(false, r.hands.containsValue(hand));
 	}
 	
 	public void testAddHandWithInvalidCards() {
@@ -101,7 +101,7 @@ public class TestRound extends TestCase {
 		String hand = "2 ThreeSnails TwentyClubs FiftyHearts PuppiesKittens TenSpades";
 		r.addHand(hand);
 		
-		assertEquals(false, r.playerHands.contains(hand));
+		assertEquals(false, r.hands.containsValue(hand));
 	}
 	
 	public void testAddHandWithDuplicateCards() {
@@ -111,7 +111,7 @@ public class TestRound extends TestCase {
 		String hand = "3 TwoHearts TwoHearts FiveSpades QueenDiamonds NineClubs";
 		r.addHand(hand);
 		
-		assertEquals(false, r.playerHands.contains(hand));
+		assertEquals(false, r.hands.containsValue(hand));
 	}
 
 }

@@ -1,28 +1,18 @@
 package com.comp4004.a1;
 
-import java.util.Vector;
+import java.util.HashMap;
 
 public class Round {
 	int             numPlayers;
-	Vector<Integer> playerIDs;
-	Vector<String>  playerHands;
+	HashMap<Integer, String> hands;
 	Deck            d;
 	
 	private Round(int p) {
 		// set number of players for this round
 		numPlayers = p;
 		
-		// allocate array of player IDs
-		playerIDs = new Vector<Integer>(numPlayers);
-		
-		// assign playerID for each player
-		for(int i = 0; i < numPlayers; ++i) {
-			playerIDs.add(i+1);
-		}
-		
-		// allocate vector of player hands with max size numPlayers
-		// actual size is 0 upon initialization
-		playerHands = new Vector<String>(numPlayers);
+		// allocate hashmap for players' hands
+		hands = new HashMap<Integer, String>();
 		
 		// initialize deck of cards
 		d = new Deck();
@@ -42,10 +32,11 @@ public class Round {
 		return numPlayers;
 	}
 	
+	// TODO: addHand(int playerID, Card[] cards)
 	public void addHand(String hand) {
 		// only add hand to round if it is valid
 		if(handIsValid(hand)) {
-			playerHands.add(hand);
+			hands.put(Integer.valueOf(hand.charAt(0)), hand);
 		}
 	}
 	
@@ -59,10 +50,13 @@ public class Round {
 		// get player ID from hand array
 		int playerID = Integer.parseInt(splitHand[0]);
 		
-		// check if this hand has valid player ID
-		if(!playerIDs.contains(playerID)) {
+		// check to see playerID is valid
+		if(playerID < 0 || playerID > (numPlayers-1))
 			return false;
-		}
+		
+		// check that player hasn't already played
+		if(hands.containsKey(playerID))
+			return false;
 
 		// check number of parameters after ID is valid (exactly five)
 		if((splitHand.length - 1) != 5)
