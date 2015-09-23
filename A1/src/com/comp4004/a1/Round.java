@@ -6,6 +6,7 @@ public class Round {
 	int             numPlayers;
 	Vector<Integer> playerIDs;
 	Vector<String>  playerHands;
+	Deck            d;
 	
 	private Round(int p) {
 		// set number of players for this round
@@ -22,6 +23,9 @@ public class Round {
 		// allocate vector of player hands with max size numPlayers
 		// actual size is 0 upon initialization
 		playerHands = new Vector<String>(numPlayers);
+		
+		// initialize deck of cards
+		d = new Deck();
 	}
 	
 	public static Round initRound(int p) {
@@ -48,19 +52,28 @@ public class Round {
 		if(hand.isEmpty())
 			return false;
 
+		// split hand into 6 parts (id, 5 cards)
 		String[] splitHand = hand.split("\\s");
 		
 		// get player ID from hand array
 		int playerID = Integer.parseInt(splitHand[0]);
 		
+		// check if this hand has valid player ID
 		if(!playerIDs.contains(playerID)) {
 			return false;
 		}
 
-		// check number of cards is valid
+		// check number of parameters after ID is valid (exactly five)
 		if((splitHand.length - 1) != 5)
 			return false;
 		
+		// check that each card is valid
+		for(int i = 1; i < splitHand.length; ++i) {
+			if(d.cards.contains(splitHand[i]))
+				return false;
+		}
+		
+		// if all tests pass
 		return true;
 	}
 }

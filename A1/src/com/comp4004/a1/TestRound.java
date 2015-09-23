@@ -92,6 +92,17 @@ public class TestRound extends TestCase {
 		
 		assertEquals(false, r.playerHands.contains(hand));
 	}
+	
+	public void testAddHandWithInvalidCards() {
+		int numPlayers = 4;
+		setUp(numPlayers);
+		
+		// invalid cards except one
+		String hand = "2 ThreeSnails TwentyClubs FiftyHearts PuppiesKittens TenSpades";
+		r.addHand(hand);
+		
+		assertEquals(false, r.playerHands.contains(hand));
+	}
 
 }
 
