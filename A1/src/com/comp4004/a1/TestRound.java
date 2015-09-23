@@ -75,7 +75,7 @@ public class TestRound extends TestCase {
 		int numPlayers = 4;
 		setUp(numPlayers);
 		
-		// not enough cards to be a valid hand
+		// not enough cards to be a valid hand (4)
 		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades";
 		r.addHand(hand);
 		
@@ -86,7 +86,7 @@ public class TestRound extends TestCase {
 		int numPlayers = 4;
 		setUp(numPlayers);
 		
-		// too many cards to be a valid hand
+		// too many cards to be a valid hand (6)
 		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds AceDiamonds";
 		r.addHand(hand);
 		
