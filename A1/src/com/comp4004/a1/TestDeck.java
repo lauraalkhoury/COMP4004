@@ -20,4 +20,17 @@ public class TestDeck extends TestCase {
 		
 		assertEquals(true, d.isValidCard("TenHearts"));
 	}
+	
+	public void testUnusedCard() {
+		Deck d = new Deck();
+		
+		assertEquals(false, d.isCardInUse("ThreeDiamonds"));
+	}
+	
+	public void testUsedCard() {
+		Deck d = new Deck();
+		d.setCardInUse(true, "ThreeDiamonds");
+		
+		assertEquals(true, d.isCardInUse("ThreeDiamonds"));
+	}
 }
