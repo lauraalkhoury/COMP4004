@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Round {
 	int                      numPlayers;
-	HashMap<Integer, String> hands;
+	HashMap<Integer, Card[]> hands;
 	Deck                     d;
 	
 	private Round(int p) {
@@ -12,7 +12,7 @@ public class Round {
 		numPlayers = p;
 		
 		// allocate hashmap for players' hands
-		hands = new HashMap<Integer, String>();
+		hands = new HashMap<Integer, Card[]>();
 		
 		// initialize deck of cards
 		d = new Deck();
@@ -45,12 +45,18 @@ public class Round {
 			return;
 				
 		// split hand string (ignoring player ID) into cards
-		String[] cards = hand.substring(1).split("\\s");
+		String[] cardStrings = hand.substring(1).split("\\s");
 		
-		// check that cards are valid
-		if(handIsValid(cards)) {
-			hands.put(id, hand);
+		// if cards in hand are invalid, do not add hand
+		if(!handIsValid(cardStrings))
+			return;
+		
+		Card[] cards = new Card[cardStrings.length];
+		for(int i = 0; i < cards.length; ++i) {
+			// convert string to card object
+			cards[i] = new Card(cardStrings[i]);
 		}
+		hands.put(id, cards);
 	}
 	
 	public boolean handIsValid(String[] cards) {
@@ -85,5 +91,9 @@ public class Round {
 			return false;
 		
 		return true;
+	}
+	
+	public void stringToCard(String card) {
+		
 	}
 }
