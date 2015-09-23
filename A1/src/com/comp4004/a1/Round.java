@@ -92,8 +92,4 @@ public class Round {
 		
 		return true;
 	}
-	
-	public void stringToCard(String card) {
-		
-	}
 }
