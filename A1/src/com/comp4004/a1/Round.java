@@ -28,12 +28,12 @@ public class Round {
 		d = new Deck();
 	}
 	
-	public static Round initRound(int p) {
-		if(p < 2 || p > 4) {
+	public static Round initRound(int numPlayers) {
+		if(numPlayers < 2 || numPlayers > 4) {
 			return null;
 		}
 		else {
-			Round r = new Round(p);
+			Round r = new Round(numPlayers);
 			return r;
 		}
 	}
