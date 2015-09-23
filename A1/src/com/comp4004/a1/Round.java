@@ -39,13 +39,13 @@ public class Round {
 		
 		// get player ID
 		int id = Integer.valueOf(hand.charAt(0));
-				
-		// split hand string (ignoring player ID) into cards
-		String[] cards = hand.substring(1).split("\\s");
 		
 		// if ID is invalid, do not add hand
 		if(!idIsValid(id))
 			return;
+				
+		// split hand string (ignoring player ID) into cards
+		String[] cards = hand.substring(1).split("\\s");
 		
 		// check that cards are valid
 		if(handIsValid(cards)) {
