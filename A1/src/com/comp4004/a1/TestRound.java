@@ -103,6 +103,16 @@ public class TestRound extends TestCase {
 		
 		assertEquals(false, r.playerHands.contains(hand));
 	}
+	
+	public void testAddHandWithDuplicateCards() {
+		int numPlayers = 4;
+		setUp(numPlayers);
+		
+		String hand = "3 TwoHearts TwoHearts FiveSpades QueenDiamonds NineClubs";
+		r.addHand(hand);
+		
+		assertEquals(false, r.playerHands.contains(hand));
+	}
 
 }
 

@@ -26,4 +26,19 @@ public class Deck {
 		}
 		return false;
 	}
+
+	public boolean isCardInUse(String card) {
+		for(int i = 0; i < cards.size(); ++i) {
+			if(cards.elementAt(i).getName().equals(card))
+				return cards.elementAt(i).isInUse();
+		}
+		return false;
+	}
+	
+	public void setCardInUse(boolean b, String card) {
+		for(int i = 0; i < cards.size(); ++i) {
+			if(cards.elementAt(i).getName().equals(card))
+				cards.elementAt(i).setInUse(b);
+		}
+	}
 }

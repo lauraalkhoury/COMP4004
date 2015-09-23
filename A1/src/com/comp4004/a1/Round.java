@@ -44,8 +44,9 @@ public class Round {
 	
 	public void addHand(String hand) {
 		// only add hand to round if it is valid
-		if(handIsValid(hand))
+		if(handIsValid(hand)) {
 			playerHands.add(hand);
+		}
 	}
 	
 	public boolean handIsValid(String hand) {
@@ -67,10 +68,17 @@ public class Round {
 		if((splitHand.length - 1) != 5)
 			return false;
 		
-		// check that each card is valid
 		for(int i = 1; i < splitHand.length; ++i) {
+			// check that each card has valid name
 			if(!d.isValidCard(splitHand[i]))
 				return false;
+			
+			// check card is not already in use
+			if(d.isCardInUse(splitHand[i]))
+				return false;
+			
+			// if card passes tests, set it to "in use"
+			d.setCardInUse(true, splitHand[i]);
 		}
 		
 		// if all tests pass
