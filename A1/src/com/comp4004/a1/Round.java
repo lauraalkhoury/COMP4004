@@ -69,7 +69,7 @@ public class Round {
 		
 		// check that each card is valid
 		for(int i = 1; i < splitHand.length; ++i) {
-			if(d.cards.contains(splitHand[i]))
+			if(!d.isValidCard(splitHand[i]))
 				return false;
 		}
 		

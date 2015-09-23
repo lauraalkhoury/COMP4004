@@ -8,4 +8,16 @@ public class TestDeck extends TestCase {
 		Deck d = new Deck();
 		assertEquals(52, d.cards.size());
 	}
+	
+	public void testInValidCard() {
+		Deck d = new Deck();
+		
+		assertEquals(false, d.isValidCard("HelloWorld"));
+	}
+	
+	public void testValidCard() {
+		Deck d = new Deck();
+		
+		assertEquals(true, d.isValidCard("TenHearts"));
+	}
 }

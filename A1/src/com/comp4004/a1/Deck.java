@@ -6,19 +6,24 @@ public class Deck {
 	String[] suits   = {"Clubs", "Diamonds", "Hearts", "Spades"};
 	String[] numbers = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
 	
-	Vector<String> cards = new Vector<String>();
+	Vector<Card> cards = new Vector<Card>();
 	
 	public Deck() {
-		//cards = new String[52];
-		
 		// generate a deck of cards
-//		int cardIndex = 0;
 		for(int i = 0; i < suits.length; ++i) {
 			for(int j = 0; j < numbers.length; ++j) {
-				cards.addElement(numbers[j]+suits[i]);
-//				System.out.println("New card number: " + " " + cards.elementAt(cardIndex));
-//				cardIndex++;
+				Card c = new Card(numbers[j]+suits[i]);
+				cards.addElement(c);
 			}
 		}
+	}
+
+	public boolean isValidCard(String card) {
+		// check if given card name is in deck
+		for(int i = 0; i < cards.size(); ++i) {
+			if(cards.elementAt(i).getName().equals(card))
+				return true;
+		}
+		return false;
 	}
 }
