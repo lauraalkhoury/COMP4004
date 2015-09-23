@@ -37,28 +37,28 @@ public class Round {
 		if(hand.isEmpty())
 			return;
 		
-		// split hand into 6 parts (id, 5 cards)
-		String[] splitHand = hand.split("\\s");
-		
-		// get player ID from hand array
-		int id = Integer.parseInt(splitHand[0]);
+		// get player ID
+		int id = Integer.valueOf(hand.charAt(0));
+				
+		// split hand string (ignoring player ID) into cards
+		String[] cards = hand.substring(1).split("\\s");
 		
 		// if ID is invalid, do not add hand
 		if(!idIsValid(id))
 			return;
 		
 		// check that cards are valid
-		if(handIsValid(splitHand)) {
-			hands.put(Integer.valueOf(hand.charAt(0)), hand);
+		if(handIsValid(cards)) {
+			hands.put(id, hand);
 		}
 	}
 	
 	public boolean handIsValid(String[] cards) {
 		// check number of cards is valid (exactly five)
-		if((cards.length - 1) != 5)
+		if((cards.length) != 5)
 			return false;
 		
-		for(int i = 1; i < cards.length; ++i) {
+		for(int i = 0; i < cards.length; ++i) {
 			// check that each card has valid name
 			if(!d.isValidCard(cards[i]))
 				return false;
