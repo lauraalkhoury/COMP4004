@@ -130,6 +130,17 @@ public class TestRound extends TestCase {
 		assertEquals(results, true);
 	}
 	
+	public void testIsNotRoyalFlush() {
+		setUp();
+		
+		String[] cardStrArr = {"AceSpades", "KingHearts", "QueenHearts", "JackHearts", "TenHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+
+		boolean results = r.isRoyalFlush(cardArr);
+		
+		assertEquals(results, false);
+	}
+	
 	
 
 }
