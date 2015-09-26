@@ -79,6 +79,8 @@ public class Round {
 			 }
 			 
 			 cards[i] = c;
+			 
+			 d.setCardInUse(true, cardStrings[i]);
 		}
 		return cards;
 	}
