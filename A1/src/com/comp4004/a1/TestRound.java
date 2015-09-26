@@ -48,9 +48,9 @@ public class TestRound extends TestCase {
 		setUp(numPlayers);
 		
 		String hand = "";
-		r.addHand(hand);
+		boolean addSuccess = r.addHand(hand);
 		
-		assertEquals(false, r.hands.containsValue(hand));
+		assertEquals(addSuccess, false);
 	}
 	
 	public void testAddHandWithInvalidPlayerID() {
@@ -70,9 +70,9 @@ public class TestRound extends TestCase {
 		
 		// not enough cards to be a valid hand (4)
 		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades";
-		r.addHand(hand);
+		boolean addSuccess = r.addHand(hand);
 		
-		assertEquals(false, r.hands.containsValue(hand));
+		assertEquals(addSuccess, false);
 	}
 	
 	public void testAddHandWithTooManyCards() {
@@ -81,9 +81,9 @@ public class TestRound extends TestCase {
 		
 		// too many cards to be a valid hand (6)
 		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds AceDiamonds";
-		r.addHand(hand);
+		boolean addSuccess = r.addHand(hand);
 		
-		assertEquals(false, r.hands.containsValue(hand));
+		assertEquals(addSuccess, false);
 	}
 	
 	public void testAddHandWithInvalidCards() {
@@ -92,9 +92,9 @@ public class TestRound extends TestCase {
 		
 		// invalid cards except one
 		String hand = "2 ThreeSnails TwentyClubs FiftyHearts PuppiesKittens TenSpades";
-		r.addHand(hand);
+		boolean addSuccess = r.addHand(hand);
 		
-		assertEquals(false, r.hands.containsValue(hand));
+		assertEquals(addSuccess, false);
 	}
 	
 	public void testAddHandWithDuplicateCards() {
@@ -102,9 +102,9 @@ public class TestRound extends TestCase {
 		setUp(numPlayers);
 		
 		String hand = "3 TwoHearts TwoHearts FiveSpades QueenDiamonds NineClubs";
-		r.addHand(hand);
+		boolean addSuccess = r.addHand(hand);
 		
-		assertEquals(false, r.hands.containsValue(hand));
+		assertEquals(addSuccess, false);
 	}
 
 }

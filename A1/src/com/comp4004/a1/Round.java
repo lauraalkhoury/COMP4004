@@ -32,53 +32,55 @@ public class Round {
 		return numPlayers;
 	}
 	
-	public void addHand(String hand) {
+	public boolean addHand(String hand) {
 		// check that hand is not empty
-		if(hand.isEmpty())
-			return;
+		if(hand.isEmpty()) {
+			return false;
+		}
 		
 		// get player ID
-		int id = Integer.valueOf(hand.charAt(0));
+		int id =  Character.getNumericValue(hand.charAt(0));
 		
 		// if ID is invalid, do not add hand
-		if(!idIsValid(id))
-			return;
+		if(!idIsValid(id)) {
+			return false;
+		}
 				
 		// split hand string (ignoring player ID) into cards
-		String[] cardStrings = hand.substring(1).split("\\s");
+		String[] cardStrings = hand.substring(2).split("\\s");
 		
-		// if cards in hand are invalid, do not add hand
-		if(!handIsValid(cardStrings))
-			return;
-		
-		Card[] cards = new Card[cardStrings.length];
-		for(int i = 0; i < cards.length; ++i) {
-			// convert string to card object
-			cards[i] = new Card(cardStrings[i]);
+		// check number of cards is valid (exactly five)
+		if((cardStrings.length) != 5) {
+			return false;
 		}
+		
+		// createCardArray checks internally that each cardString is valid
+		Card[] cards = createCardArray(cardStrings);
+		if(cards == null) {
+			return false; // one or more cardStrings was invalid
+		}
+
 		hands.put(id, cards);
+		return true;
 	}
 	
-	public boolean handIsValid(String[] cards) {
-		// check number of cards is valid (exactly five)
-		if((cards.length) != 5)
-			return false;
-		
-		for(int i = 0; i < cards.length; ++i) {
-			// check that each card has valid name
-			if(!d.isValidCard(cards[i]))
-				return false;
-			
-			// check card is not already in use
-			if(d.isCardInUse(cards[i]))
-				return false;
-			
-			// if card passes tests, set it to "in use"
-			d.setCardInUse(true, cards[i]);
+	public Card[] createCardArray(String[] cardStrings) {
+		Card[] cards = new Card[5];
+		for(int i = 0; i < cardStrings.length; ++i) {
+			// check with deck to make sure card is not in use
+			if(d.isCardInUse(cardStrings[i])) {
+				return null;
+			}
+			 Card c = new Card();
+			 
+			 // createFromString ensures that cardString passed in is valid
+			 if(c.createFromString(cardStrings[i]) == false) {
+				 return null;
+			 }
+			 
+			 cards[i] = c;
 		}
-		
-		// if all tests pass
-		return true;
+		return cards;
 	}
 	
 	public boolean idIsValid(int id) {

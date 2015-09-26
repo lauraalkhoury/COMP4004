@@ -18,6 +18,7 @@ public class Deck {
 		}
 	}
 
+	// TODO: remove this from Deck, add validity checking in createFromString function (Card class)
 	public boolean isValidCard(String card) {
 		// check if given card name is in deck
 		for(int i = 0; i < cards.size(); ++i) {

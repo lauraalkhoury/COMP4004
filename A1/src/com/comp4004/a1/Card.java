@@ -4,6 +4,10 @@ public class Card {
 	private String  name;
 	private boolean inUse;
 	
+	public Card() {
+		inUse = false;
+	}
+	
 	public Card(String n) {
 		name  = n;
 		inUse = false;
@@ -13,11 +17,16 @@ public class Card {
 		return name;
 	}
 	
-	public boolean isInUse() {
+	public boolean isInUse() {	
 		return inUse;
 	}
 	
 	public void setInUse(boolean b) {
 		inUse = b;
+	}
+	
+	public boolean createFromString(String s) {
+		this.name = s;
+		return true;
 	}
 }
