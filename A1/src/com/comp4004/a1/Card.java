@@ -28,10 +28,10 @@ public class Card {
 	}
 	
 	public boolean createFromString(String cardName) {
-		
 		String[] splitCardString = cardName.split("(?=\\p{Upper})");
-		if(splitCardString.length != 2)
+		if(splitCardString.length != 2) {
 			return false;
+		}
 		
 		CardNum cn = toCardNum(splitCardString[0]);
 		Suit    s  = toSuit(splitCardString[1]);
@@ -89,6 +89,8 @@ public class Card {
 			return CardNum.QUEEN;
 		case "King":
 			return CardNum.KING;
+		case "Ace":
+			return CardNum.ACE;
 		default:
 			return null;
 		}

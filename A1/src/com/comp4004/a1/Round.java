@@ -1,5 +1,6 @@
 package com.comp4004.a1;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Round {
@@ -72,7 +73,7 @@ public class Round {
 				return null;
 			}
 			 Card c = new Card();
-			 
+					 
 			 // createFromString ensures that cardString passed in is valid
 			 if(c.createFromString(cardStrings[i]) == false) {
 				 return null;
@@ -99,5 +100,18 @@ public class Round {
 	
 	public int[] rank() {	
 		return null;
+	}
+	
+	public boolean isRoyalFlush(Card[] c) {
+		if(c.length == 0)
+			return false;
+		
+		Suit initialSuit = c[0].suit;
+		for(int i = 1; i < c.length; ++i) {
+			if(c[i].suit != initialSuit) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

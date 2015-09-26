@@ -1,5 +1,7 @@
 package com.comp4004.a1;
 
+import java.util.Arrays;
+
 //TestRound.java---------------------------------
 import junit.framework.*; 
 
@@ -122,5 +124,22 @@ public class TestRound extends TestCase {
 		
 		assertEquals(correctRanking, actualRanking);
 	}
+	
+	public void testIsRoyalFlush() {
+		System.out.println("Entering testIsRoyalFlush");
+		int numPlayers = 4;
+		setUp(numPlayers);
+		
+		String[] cardStrArr = {"AceHearts", "KingHearts", "QueenHearts", "JackHearts", "TenHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		System.out.println(Arrays.toString(cardStrArr));
+		System.out.println(Arrays.toString(cardArr));
+
+		boolean results = r.isRoyalFlush(cardArr);
+		
+		System.out.println("Exiting testIsRoyalFlush");
+		assertEquals(results, true);
+	}
+
 }
 
