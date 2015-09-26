@@ -36,4 +36,25 @@ public class TestCard extends TestCase {
 		
 		assertEquals(s, Suit.DIAMONDS);
 	}
+	
+	public void testEmptyToCardNum() {
+		Card c = new Card();
+		Suit s = c.toSuit("");
+		
+		assertEquals(s, null);
+	}
+	
+	public void testInvalidToCardNum() {
+		Card c = new Card();
+		Suit s = c.toSuit("Kittens");
+		
+		assertEquals(s, null);
+	}
+	
+	public void testValidToCardNum() {
+		Card c     = new Card();
+		CardNum cn = c.toCardNum("Three");
+		
+		assertEquals(cn, CardNum.THREE);
+	}
 }

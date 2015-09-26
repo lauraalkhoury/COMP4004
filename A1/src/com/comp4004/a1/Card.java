@@ -45,4 +45,35 @@ public class Card {
 			return null;
 		}
 	}
+	
+	public CardNum toCardNum(String s) {
+		switch(s) {
+		case "Two":
+			return CardNum.TWO;
+		case "Three":
+			return CardNum.THREE;
+		case "Four":
+			return CardNum.FOUR;
+		case "Five":
+			return CardNum.FIVE;
+		case "Six":
+			return CardNum.SIX;
+		case "Seven":
+			return CardNum.SEVEN;
+		case "Eight":
+			return CardNum.EIGHT;
+		case "Nine":
+			return CardNum.NINE;
+		case "Ten":
+			return CardNum.TEN;
+		case "Jack":
+			return CardNum.JACK;
+		case "Queen":
+			return CardNum.QUEEN;
+		case "King":
+			return CardNum.KING;
+		default:
+			return null;
+		}
+	}
 }
