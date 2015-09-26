@@ -19,13 +19,12 @@ public class Round {
 	}
 	
 	public static Round initRound(int numPlayers) {
+		// check to make sure numPlayers is valid
 		if(numPlayers < 2 || numPlayers > 4) {
 			return null;
 		}
-		else {
-			Round r = new Round(numPlayers);
-			return r;
-		}
+		Round r = new Round(numPlayers);
+		return r;
 	}
 	
 	public int getNumPlayers() {
@@ -60,6 +59,7 @@ public class Round {
 			return false; // one or more cardStrings was invalid
 		}
 
+		// if all checks pass, add cards array to hands HashMap
 		hands.put(id, cards);
 		return true;
 	}
@@ -95,5 +95,9 @@ public class Round {
 			return false;
 		
 		return true;
+	}
+	
+	public int[] rank() {	
+		return null;
 	}
 }
