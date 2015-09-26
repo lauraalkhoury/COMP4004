@@ -15,4 +15,25 @@ public class TestCard extends TestCase {
 		
 		assertEquals(false, c.isInUse());
 	}
+	
+	public void testEmptyToSuit() {
+		Card c = new Card();
+		Suit s = c.toSuit("");
+		
+		assertEquals(s, null);
+	}
+	
+	public void testInvalidToSuit() {
+		Card c = new Card();
+		Suit s = c.toSuit("Kittens");
+		
+		assertEquals(s, null);
+	}
+	
+	public void testValidToSuit() {
+		Card c = new Card();
+		Suit s = c.toSuit("Diamonds");
+		
+		assertEquals(s, Suit.DIAMONDS);
+	}
 }
