@@ -3,6 +3,7 @@ package com.comp4004.a1;
 public class Card {
 	private String  name;
 	private boolean inUse;
+	public  CardNum cardNum;
 	public  Suit    suit;
 	
 	public Card() {
@@ -26,8 +27,24 @@ public class Card {
 		inUse = b;
 	}
 	
-	public boolean createFromString(String s) {
-		this.name = s;
+	public boolean createFromString(String cardName) {
+		
+		String[] splitCardString = cardName.split("(?=\\p{Upper})");
+		if(splitCardString.length != 2)
+			return false;
+		
+		CardNum cn = toCardNum(splitCardString[0]);
+		Suit    s  = toSuit(splitCardString[1]);
+		
+		// if either CardNum or Suit is invalid
+		if(cn == null || s == null) {
+			return false;
+		}
+		
+		this.name    = cardName;
+		this.cardNum = cn;
+		this.suit    = s;
+		
 		return true;
 	}
 	

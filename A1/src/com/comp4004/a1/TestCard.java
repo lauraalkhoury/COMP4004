@@ -57,4 +57,32 @@ public class TestCard extends TestCase {
 		
 		assertEquals(cn, CardNum.THREE);
 	}
+	
+	public void testEmptyCreateFromString() {
+		Card c = new Card();
+		boolean success = c.createFromString("");
+		
+		assertEquals(success, false);
+	}
+	
+	public void testInvalidCardNumCreateFromString() {
+		Card c = new Card();
+		boolean success = c.createFromString("FifteenHearts");
+		
+		assertEquals(success, false);
+	}
+	
+	public void testInvalidSuitCreateFromString() {
+		Card c = new Card();
+		boolean success = c.createFromString("TenKittens");
+		
+		assertEquals(success, false);
+	}
+	
+	public void testValidCreateFromString() {
+		Card c = new Card();
+		boolean success = c.createFromString("TenHearts");
+		
+		assertEquals(success, true);
+	}
 }
