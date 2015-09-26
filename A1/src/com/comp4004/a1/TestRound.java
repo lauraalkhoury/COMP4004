@@ -1,7 +1,5 @@
 package com.comp4004.a1;
 
-import java.util.Arrays;
-
 //TestRound.java---------------------------------
 import junit.framework.*; 
 
@@ -14,6 +12,10 @@ public class TestRound extends TestCase {
 	
 	public void setUp(int numPlayers) {
 		r = Round.initRound(numPlayers);
+	}
+	
+	public void setUp() {
+		r = Round.initRound(4);
 	}
 	
 	public void testSetNumPlayers() {
@@ -39,15 +41,13 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testInitialNumHands() {
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		assertEquals(0, r.hands.size());
 	}
 	
 	public void testAddEmptyHand() {
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		String hand = "";
 		boolean addSuccess = r.addHand(hand);
@@ -56,8 +56,7 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testAddHandWithInvalidPlayerID() {
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		// 8 is an invalid player ID
 		String hand = "8 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds";
@@ -67,8 +66,7 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testAddHandWithTooFewCards() {
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		// not enough cards to be a valid hand (4)
 		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades";
@@ -78,8 +76,7 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testAddHandWithTooManyCards() {
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		// too many cards to be a valid hand (6)
 		String hand = "1 AceSpades TwoHearts ThreeClubs NineSpades TenDiamonds AceDiamonds";
@@ -89,8 +86,7 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testAddHandWithInvalidCards() {
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		// invalid cards except one
 		String hand = "2 ThreeSnails TwentyClubs FiftyHearts PuppiesKittens TenSpades";
@@ -100,8 +96,7 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testAddHandWithDuplicateCards() {
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		String hand = "3 TwoHearts TwoHearts FiveSpades QueenDiamonds NineClubs";
 		boolean addSuccess = r.addHand(hand);
@@ -110,8 +105,7 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testRankHand() {
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
 		r.addHand("3 NineClubs EightClubs SevenClubs SixClubs FiveClubs");    // straight flush
@@ -126,20 +120,17 @@ public class TestRound extends TestCase {
 	}
 	
 	public void testIsRoyalFlush() {
-		System.out.println("Entering testIsRoyalFlush");
-		int numPlayers = 4;
-		setUp(numPlayers);
+		setUp();
 		
 		String[] cardStrArr = {"AceHearts", "KingHearts", "QueenHearts", "JackHearts", "TenHearts"};
 		Card[]   cardArr    = r.createCardArray(cardStrArr);
-		System.out.println(Arrays.toString(cardStrArr));
-		System.out.println(Arrays.toString(cardArr));
 
 		boolean results = r.isRoyalFlush(cardArr);
 		
-		System.out.println("Exiting testIsRoyalFlush");
 		assertEquals(results, true);
 	}
+	
+	
 
 }
 
