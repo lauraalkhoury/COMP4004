@@ -121,24 +121,35 @@ public class TestRound extends TestCase {
 //		assertEquals(correctRanking, actualRanking);
 //	}
 	
-	public void testIsRoyalFlush() {
+	public void testIsAceToTenInOrder() {
 		setUp();
 		
 		String[] cardStrArr = {"AceHearts", "KingHearts", "QueenHearts", "JackHearts", "TenHearts"};
 		Card[]   cardArr    = r.createCardArray(cardStrArr);
 
-		boolean results = r.isRoyalFlush(cardArr);
+		boolean results = r.isAceToTen(cardArr);
 		
 		assertEquals(results, true);
 	}
 	
-	public void testIsNotRoyalFlush() {
+	public void testIsAceToTenOutOfOrder() {
 		setUp();
 		
-		String[] cardStrArr = {"AceSpades", "KingHearts", "QueenHearts", "JackHearts", "TenHearts"};
+		String[] cardStrArr = {"KingHearts", "AceHearts", "JackHearts", "TenHearts", "QueenHearts"};
 		Card[]   cardArr    = r.createCardArray(cardStrArr);
 
-		boolean results = r.isRoyalFlush(cardArr);
+		boolean results = r.isAceToTen(cardArr);
+		
+		assertEquals(results, true);
+	}
+	
+	public void testIsNotAceToTen() {
+		setUp();
+		
+		String[] cardStrArr = {"AceSpades", "NineHearts", "QueenHearts", "JackHearts", "TenHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+
+		boolean results = r.isAceToTen(cardArr);
 		
 		assertEquals(results, false);
 	}
@@ -286,6 +297,105 @@ public class TestRound extends TestCase {
 		boolean result = r.checkStraight(cardArr);
 		
 		assertEquals(result, false);
+	}
+	
+	public void testRankHandRoyalFlush() {
+		String[] cardStrArr = {"AceHearts", "KingHearts", "QueenHearts", "JackHearts", "TenHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 1);
+	}
+	
+	public void testRankHandStraightFlush() {
+		String[] cardStrArr = {"NineClubs", "EightClubs", "SevenClubs", "SixClubs", "FiveClubs"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 2);
+	}
+	
+	public void testRankHandFourOfAKind() {
+		String[] cardStrArr = {"AceHearts","AceSpades", "AceDiamonds", "AceClubs", "KingHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 3);
+	}
+	
+	public void testRankHandFullHouse() {
+		String[] cardStrArr = {"AceHearts","AceSpades", "AceDiamonds", "KingHearts", "KingSpades"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 4);
+	}
+	
+	public void testRankHandFlush() {
+		String[] cardStrArr = {"AceSpades", "TenSpades", "SevenSpades", "SixSpades", "TwoSpades"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 5);
+	}
+	
+	public void testRankHandStraightAceLow() {
+		String[] cardStrArr = {"FiveClubs", "FourDiamonds", "ThreeSpades", "TwoHearts", "AceHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 6);
+	}
+	
+	public void testRankHandStraightAceHigh() {
+		String[] cardStrArr = {"AceDiamonds", "KingClubs", "QueenSpades", "JackDiamonds", "TenHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 6);
+	}
+	
+	public void testRankHandThreeOfAKind() {
+		String[] cardStrArr = {"AceHearts","AceSpades", "AceDiamonds", "KingSpades", "QueenClubs"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 7);
+	}
+	
+	public void testRankHandTwoPair() {
+		String[] cardStrArr = {"AceHearts","AceSpades", "KingClubs", "KingDiamonds", "QueenSpades"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 8);
+	}
+	
+	public void testRankHandOnePair() {
+		String[] cardStrArr = {"AceHearts","AceSpades", "KingClubs", "QueenSpades", "JackDiamonds"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 9);
+	}
+	
+	public void testRankHandHighCard() {
+		String[] cardStrArr = {"AceHearts","KingClubs", "QueenDiamonds", "JackClubs", "NineSpades"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		int actualRank   = r.rankHand(cardArr);
+		
+		assertEquals(actualRank, 10);
 	}
 }
 

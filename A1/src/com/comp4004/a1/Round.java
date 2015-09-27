@@ -100,39 +100,54 @@ public class Round {
 	
 	public int rankHand(Card[] cards) {
 		HashMap<Suit, Integer> suitCount = countSuits(cards);
-		HashMap<CardNum, Integer> cardNumCount = countCardNums(cards);
 		
 		// if suitCount = [5]
-			// is royal flush? (1)
-			// is straight flush? (2)
-			// else flush (5)
+		if(suitCount.containsValue(5)) {
+			if(isAceToTen(cards))       // check royal flush (1)
+				return 1;
+			else if(checkStraight(cards)) // check straight flush (2)
+				return 2;
+			else                          // if not, must be flush (5)
+				return 5;
+		}
+		
+		HashMap<CardNum, Integer> cardNumCount = countCardNums(cards);
 		
 		// if cardNumCount = [4, 1], four of a kind (3)
+		if(cardNumCount.containsValue(4))
+			return 3;
 		
-		// if cardNumCount = [3, 2], full house (2)
+		// if cardNumCount = [3, 2], full house (4)
+		if(cardNumCount.containsValue(3) && cardNumCount.containsValue(2))
+			return 4;
 		
 		// if Rank[i - (i-4)], straight (6)
+		if(checkStraight(cards))
+			return 6;
 		
-		// if cardNum.containsValue(3), three of a kind (7)
+		// three of a kind (7)
+		if(cardNumCount.containsValue(3)) 
+			return 7;
 		
-		// if cardNum.containsValues(2, 2), two pair (8)
+		// count number of pairs in hand
+		int pairCount = 0;
+		for (Integer value : cardNumCount.values()) {
+		    if(value == 2)
+		    	pairCount++;
+		}
 		
-		// if cardNum.containsValue(2), one pair (9)
-		
-		// else high card (10)
-		
-		return -1;
+		if(pairCount == 2)
+			return 8; // two pair (8)
+		else if(pairCount == 1)
+			return 9; // one pair (9)
+		else
+			return 10; // high card (10)
 	}
 	
-	public boolean isRoyalFlush(Card[] cards) {
-		// check that all suits are the same
-		HashMap<Suit, Integer> suitCount = countSuits(cards);
-		if(!suitCount.containsValue(5))
-			return false;
-		
+	public boolean isAceToTen(Card[] cards) {
 		// sort highest card number first
 		Arrays.sort(cards);
-
+		
 		// check for exact card numbers
 		if((cards[0].cardNum == CardNum.ACE) &&
 		   (cards[1].cardNum == CardNum.KING) &&
@@ -156,10 +171,56 @@ public class Round {
 	
 	// checks if given cards have consecutive values (after sorting)
 	public boolean checkStraight(Card[] cards) {
-		Arrays.sort(cards);
+		// sort ace-high or ace-low?
+		boolean containsAce  = false;
+		boolean containsKing = false;
+		boolean containsTwo  = false;
+		
+		String[] cardNames = new String[5];
+		for(int i = 0; i < cards.length; i++) {
+			cardNames[i] = cards[i].getName();
+		}
+		
+		for(int i = 0; i < cards.length; ++i) {
+			//check for ace in deck
+			if(cards[i].cardNum == CardNum.ACE)
+				containsAce = true;
+
+			//check for king in deck
+			if(cards[i].cardNum == CardNum.KING)
+				containsKing = true;
+			
+			//check for two in deck
+			if(cards[i].cardNum == CardNum.TWO)
+				containsTwo = true;
+		}
+		
+		if(!containsAce || (containsAce && containsKing))
+			Arrays.sort(cards); // sort normally
+		if(containsKing && containsTwo)
+			return false; // not possibly a straight
+		if(containsAce && containsTwo) {
+			// sort array for low ace
+			// ie. [A, 5, 4, 3, 2] becomes [5, 4, 3, 2, A]
+			Arrays.sort(cards);
+
+			// shift elements down one
+			Card temp = cards[0];
+
+			for (int i = 0; i < (cards.length-1); ++i) {
+				cards[i] = cards[i+1];
+			}
+			
+			// move ace (presumably first element) to the end
+			cards[cards.length - 1] = temp;
+		}
 		
 		int initCardNum = cards[0].cardNum.getValue();
 		for(int i = 1; i < cards.length; ++i) {
+			if(initCardNum == 5)
+			// add case for low-ace (ie. [5, 4, 3, 2, ACE] is a valid straight)
+			if(i == 4 && (cards[i-1].cardNum == CardNum.TWO && cards[i].cardNum == CardNum.ACE))
+				return true;
 			if(cards[i].cardNum.getValue() != (initCardNum - i)) {
 				return false;
 			}
