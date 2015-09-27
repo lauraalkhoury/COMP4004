@@ -141,6 +141,28 @@ public class TestRound extends TestCase {
 		assertEquals(results, false);
 	}
 	
+	public void testIsStraightFlush() {
+		setUp();
+		
+		String[] cardStrArr = {"TwoSpades", "ThreeSpades", "FourSpades", "SixSpades", "FiveSpades"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+
+		boolean results = r.isStraightFlush(cardArr);
+		
+		assertEquals(results, true);
+	}
+	
+	public void testIsNotStraightFlush() {
+		setUp();
+		
+		String[] cardStrArr = {"AceSpades", "KingSpades", "QueenHearts", "JackClubs", "TenHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+
+		boolean results = r.isStraightFlush(cardArr);
+		
+		assertEquals(results, false);
+	}
+	
 	
 
 }

@@ -118,6 +118,7 @@ public class Round {
 		// sort highest card number first
 		Arrays.sort(c);
 
+		// check for correct card numbers
 		if((c[0].cardNum == CardNum.ACE) &&
 		   (c[1].cardNum == CardNum.KING) &&
 		   (c[2].cardNum == CardNum.QUEEN) &&
@@ -126,5 +127,32 @@ public class Round {
 		   return true;
 		else
 			return false;
+	}
+	
+	public boolean isStraightFlush(Card[] c) {
+		if(c.length == 0)
+			return false;
+		
+		// check that all suits are the same
+		Suit initialSuit = c[0].suit;
+
+		for(int i = 1; i < c.length; ++i) {
+			if(c[i].suit != initialSuit) {
+				return false;
+			}
+		}
+		
+		// sort highest card number first
+		Arrays.sort(c);
+		
+		// check for a consecutive streak of card numbers
+		int initCardNum = c[0].cardNum.getValue();
+		for(int i = 1; i < c.length; ++i) {
+			if(c[i].cardNum.getValue() != (initCardNum - i)) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }
