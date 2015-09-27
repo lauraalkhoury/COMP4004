@@ -103,53 +103,39 @@ public class Round {
 		return null;
 	}
 	
-	public boolean isRoyalFlush(Card[] c) {
-		if(c.length == 0)
+	public boolean isRoyalFlush(Card[] cards) {
+		// check that all suits are the same
+		HashMap<Suit, Integer> suitCount = countSuits(cards);
+		if(!suitCount.containsValue(5))
 			return false;
 		
-		// check that all suits are the same
-		Suit initialSuit = c[0].suit;
-
-		for(int i = 1; i < c.length; ++i) {
-			if(c[i].suit != initialSuit) {
-				return false;
-			}
-		}
-		
 		// sort highest card number first
-		Arrays.sort(c);
+		Arrays.sort(cards);
 
 		// check for correct card numbers
-		if((c[0].cardNum == CardNum.ACE) &&
-		   (c[1].cardNum == CardNum.KING) &&
-		   (c[2].cardNum == CardNum.QUEEN) &&
-		   (c[3].cardNum == CardNum.JACK) &&
-		   (c[4].cardNum == CardNum.TEN))
+		if((cards[0].cardNum == CardNum.ACE) &&
+		   (cards[1].cardNum == CardNum.KING) &&
+		   (cards[2].cardNum == CardNum.QUEEN) &&
+		   (cards[3].cardNum == CardNum.JACK) &&
+		   (cards[4].cardNum == CardNum.TEN))
 		   return true;
 		else
 			return false;
 	}
 	
-	public boolean isStraightFlush(Card[] c) {
-		if(c.length == 0)
+	public boolean isStraightFlush(Card[] cards) {
+		// check that all suits are the same
+		HashMap<Suit, Integer> suitCount = countSuits(cards);
+		if(!suitCount.containsValue(5))
 			return false;
 		
-		// check that all suits are the same
-		Suit initialSuit = c[0].suit;
-
-		for(int i = 1; i < c.length; ++i) {
-			if(c[i].suit != initialSuit) {
-				return false;
-			}
-		}
-		
 		// sort highest card number first
-		Arrays.sort(c);
+		Arrays.sort(cards);
 		
 		// check for a consecutive streak of card numbers
-		int initCardNum = c[0].cardNum.getValue();
-		for(int i = 1; i < c.length; ++i) {
-			if(c[i].cardNum.getValue() != (initCardNum - i)) {
+		int initCardNum = cards[0].cardNum.getValue();
+		for(int i = 1; i < cards.length; ++i) {
+			if(cards[i].cardNum.getValue() != (initCardNum - i)) {
 				return false;
 			}
 		}
