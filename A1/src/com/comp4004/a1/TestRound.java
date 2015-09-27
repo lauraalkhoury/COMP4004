@@ -260,5 +260,32 @@ public class TestRound extends TestCase {
 		
 		assertEquals(expectedCardNumCount, actualCardNumCount);
 	}
+	
+	public void testCheckSortedStraight() {
+		String[] cardStrArr = {"AceDiamonds", "KingClubs", "QueenHearts", "JackSpades", "TenDiamonds"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		boolean result = r.checkStraight(cardArr);
+		
+		assertEquals(result, true);
+	}
+	
+	public void testCheckUnsortedStraight() {
+		String[] cardStrArr = {"TenDiamonds", "KingClubs", "QueenHearts", "JackSpades", "AceDiamonds"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		boolean result = r.checkStraight(cardArr);
+		
+		assertEquals(result, true);
+	}
+	
+	public void testCheckInvalidStraight() {
+		String[] cardStrArr = {"TwoDiamonds", "KingClubs", "QueenHearts", "JackSpades", "AceDiamonds"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		boolean result = r.checkStraight(cardArr);
+		
+		assertEquals(result, false);
+	}
 }
 
