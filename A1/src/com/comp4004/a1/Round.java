@@ -158,7 +158,6 @@ public class Round {
 	}
 	
 	// this function counts the occurrences of suits in a given hand of cards
-	// 
 	public HashMap<Suit, Integer> countSuits(Card[] cards) {
 		HashMap<Suit, Integer> suits = new HashMap<Suit, Integer>();
 		
@@ -176,5 +175,24 @@ public class Round {
 			}
 		}
 		return suits;
+	}
+	
+	public HashMap<CardNum, Integer> countCardNums(Card[] cards) {
+		HashMap<CardNum, Integer> cardNums = new HashMap<CardNum, Integer>();
+		
+		for(int i = 0; i < cards.length; ++i) {
+			CardNum thisCardNum = cards[i].cardNum;
+			
+			// if this cardNum has already been entered into hashmap
+			if(cardNums.containsKey(thisCardNum)) {
+				// find hashmap entry for that cardNum, increment value
+				cardNums.put(thisCardNum, cardNums.get(thisCardNum) + 1);
+			}
+			else {
+				// create new hashmap entry with value <CardNum, 1>
+				cardNums.put(thisCardNum, 1);
+			}
+		}
+		return cardNums;
 	}
 }

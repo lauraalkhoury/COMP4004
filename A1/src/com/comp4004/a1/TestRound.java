@@ -218,5 +218,47 @@ public class TestRound extends TestCase {
 		
 		assertEquals(expectedSuitCount, actualSuitCount);
 	}
+	
+	public void testCountCardNums41() {
+		String[] cardStrArr = {"AceDiamonds", "AceClubs", "AceHearts", "AceSpades", "TenDiamonds"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		HashMap<CardNum, Integer> actualCardNumCount   = r.countCardNums(cardArr);
+		
+		HashMap<CardNum, Integer> expectedCardNumCount = new HashMap<CardNum, Integer>();
+		expectedCardNumCount.put(CardNum.ACE, 4);
+		expectedCardNumCount.put(CardNum.TEN, 1);
+		
+		assertEquals(expectedCardNumCount, actualCardNumCount);
+	}
+	
+	public void testCountCardNums32() {
+		String[] cardStrArr = {"AceDiamonds", "AceClubs", "AceHearts", "TenSpades", "TenDiamonds"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		HashMap<CardNum, Integer> actualCardNumCount   = r.countCardNums(cardArr);
+		
+		HashMap<CardNum, Integer> expectedCardNumCount = new HashMap<CardNum, Integer>();
+		expectedCardNumCount.put(CardNum.ACE, 3);
+		expectedCardNumCount.put(CardNum.TEN, 2);
+		
+		assertEquals(expectedCardNumCount, actualCardNumCount);
+	}
+	
+	public void testCountCardNums11111() {
+		String[] cardStrArr = {"AceDiamonds", "ThreeClubs", "SixHearts", "TenSpades", "KingDiamonds"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		HashMap<CardNum, Integer> actualCardNumCount   = r.countCardNums(cardArr);
+		
+		HashMap<CardNum, Integer> expectedCardNumCount = new HashMap<CardNum, Integer>();
+		expectedCardNumCount.put(CardNum.ACE, 1);
+		expectedCardNumCount.put(CardNum.THREE, 1);
+		expectedCardNumCount.put(CardNum.SIX, 1);
+		expectedCardNumCount.put(CardNum.TEN, 1);
+		expectedCardNumCount.put(CardNum.KING, 1);
+		
+		assertEquals(expectedCardNumCount, actualCardNumCount);
+	}
 }
 
