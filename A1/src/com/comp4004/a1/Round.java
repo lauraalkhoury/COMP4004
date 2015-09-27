@@ -1,6 +1,5 @@
 package com.comp4004.a1;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -99,8 +98,30 @@ public class Round {
 		return true;
 	}
 	
-	public int[] rank() {	
-		return null;
+	public int rankHand(Card[] cards) {
+		HashMap<Suit, Integer> suitCount = countSuits(cards);
+		HashMap<CardNum, Integer> cardNumCount = countCardNums(cards);
+		
+		// if suitCount = [5]
+			// is royal flush? (1)
+			// is straight flush? (2)
+			// else flush (5)
+		
+		// if cardNumCount = [4, 1], four of a kind (3)
+		
+		// if cardNumCount = [3, 2], full house (2)
+		
+		// if Rank[i - (i-4)], straight (6)
+		
+		// if cardNum.containsValue(3), three of a kind (7)
+		
+		// if cardNum.containsValues(2, 2), two pair (8)
+		
+		// if cardNum.containsValue(2), one pair (9)
+		
+		// else high card (10)
+		
+		return -1;
 	}
 	
 	public boolean isRoyalFlush(Card[] cards) {
@@ -112,7 +133,7 @@ public class Round {
 		// sort highest card number first
 		Arrays.sort(cards);
 
-		// check for correct card numbers
+		// check for exact card numbers
 		if((cards[0].cardNum == CardNum.ACE) &&
 		   (cards[1].cardNum == CardNum.KING) &&
 		   (cards[2].cardNum == CardNum.QUEEN) &&
@@ -129,17 +150,20 @@ public class Round {
 		if(!suitCount.containsValue(5))
 			return false;
 		
-		// sort highest card number first
+		// check for a consecutive streak of card numbers
+		return checkStraight(cards);
+	}
+	
+	// checks if given cards have consecutive values (after sorting)
+	public boolean checkStraight(Card[] cards) {
 		Arrays.sort(cards);
 		
-		// check for a consecutive streak of card numbers
 		int initCardNum = cards[0].cardNum.getValue();
 		for(int i = 1; i < cards.length; ++i) {
 			if(cards[i].cardNum.getValue() != (initCardNum - i)) {
 				return false;
 			}
 		}
-		
 		return true;
 	}
 	

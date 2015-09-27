@@ -106,20 +106,20 @@ public class TestRound extends TestCase {
 		assertEquals(addSuccess, false);
 	}
 	
-	public void testRankHand() {
-		setUp();
-		
-		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
-		r.addHand("3 NineClubs EightClubs SevenClubs SixClubs FiveClubs");    // straight flush
-		r.addHand("2 AceHearts AceSpades AceDiamonds AceClubs KingHearts");   // four of a kind
-		r.addHand("1 AceHearts AceSpaces AceDiamonds KingHearts KingSpades"); // full house
-		
-		int[] actualRanking = r.rank();
-		
-		int[] correctRanking = {4, 3, 2, 1};
-		
-		assertEquals(correctRanking, actualRanking);
-	}
+//	public void testRankHand() {
+//		setUp();
+//		
+//		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
+//		r.addHand("3 NineClubs EightClubs SevenClubs SixClubs FiveClubs");    // straight flush
+//		r.addHand("2 AceHearts AceSpades AceDiamonds AceClubs KingHearts");   // four of a kind
+//		r.addHand("1 AceHearts AceSpaces AceDiamonds KingHearts KingSpades"); // full house
+//		
+//		int[] actualRanking = r.rank();
+//		
+//		int[] correctRanking = {4, 3, 2, 1};
+//		
+//		assertEquals(correctRanking, actualRanking);
+//	}
 	
 	public void testIsRoyalFlush() {
 		setUp();
