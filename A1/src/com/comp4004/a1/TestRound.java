@@ -1,5 +1,7 @@
 package com.comp4004.a1;
 
+import java.util.HashMap;
+
 //TestRound.java---------------------------------
 import junit.framework.*; 
 
@@ -163,7 +165,58 @@ public class TestRound extends TestCase {
 		assertEquals(results, false);
 	}
 	
+	public void testCountSuits221() {
+		String[] cardStrArr = {"AceSpades", "KingSpades", "QueenHearts", "JackClubs", "TenHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		HashMap<Suit, Integer> actualSuitCount   = r.countSuits(cardArr);
+		
+		HashMap<Suit, Integer> expectedSuitCount = new HashMap<Suit, Integer>();
+		expectedSuitCount.put(Suit.SPADES, 2);
+		expectedSuitCount.put(Suit.HEARTS, 2);
+		expectedSuitCount.put(Suit.CLUBS, 1);
+		
+		assertEquals(expectedSuitCount, actualSuitCount);
+	}
 	
-
+	public void testCountSuits5() {
+		String[] cardStrArr = {"AceDiamonds", "KingDiamonds", "QueenDiamonds", "JackDiamonds", "TenDiamonds"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		HashMap<Suit, Integer> actualSuitCount   = r.countSuits(cardArr);
+		
+		HashMap<Suit, Integer> expectedSuitCount = new HashMap<Suit, Integer>();
+		expectedSuitCount.put(Suit.DIAMONDS, 5);
+		
+		assertEquals(expectedSuitCount, actualSuitCount);
+	}
+	
+	public void testCountSuits2111() {
+		String[] cardStrArr = {"AceSpades", "KingSpades", "QueenDiamonds", "JackClubs", "TenHearts"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		HashMap<Suit, Integer> actualSuitCount   = r.countSuits(cardArr);
+		
+		HashMap<Suit, Integer> expectedSuitCount = new HashMap<Suit, Integer>();
+		expectedSuitCount.put(Suit.SPADES, 2);
+		expectedSuitCount.put(Suit.HEARTS, 1);
+		expectedSuitCount.put(Suit.DIAMONDS, 1);
+		expectedSuitCount.put(Suit.CLUBS, 1);
+		
+		assertEquals(expectedSuitCount, actualSuitCount);
+	}
+	
+	public void testCountSuits32() {
+		String[] cardStrArr = {"KingSpades", "QueenSpades", "JackClubs", "AceSpades", "TenClubs"};
+		Card[]   cardArr    = r.createCardArray(cardStrArr);
+		
+		HashMap<Suit, Integer> actualSuitCount   = r.countSuits(cardArr);
+		
+		HashMap<Suit, Integer> expectedSuitCount = new HashMap<Suit, Integer>();
+		expectedSuitCount.put(Suit.CLUBS, 2);
+		expectedSuitCount.put(Suit.SPADES, 3);
+		
+		assertEquals(expectedSuitCount, actualSuitCount);
+	}
 }
 

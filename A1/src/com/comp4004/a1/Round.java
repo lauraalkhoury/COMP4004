@@ -1,5 +1,6 @@
 package com.comp4004.a1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -154,5 +155,26 @@ public class Round {
 		}
 		
 		return true;
+	}
+	
+	// this function counts the occurrences of suits in a given hand of cards
+	// 
+	public HashMap<Suit, Integer> countSuits(Card[] cards) {
+		HashMap<Suit, Integer> suits = new HashMap<Suit, Integer>();
+		
+		for(int i = 0; i < cards.length; ++i) {
+			Suit thisSuit = cards[i].suit;
+			
+			// if this suit has already been entered into hashmap
+			if(suits.containsKey(thisSuit)) {
+				// find hashmap entry for that suit, increment value
+				suits.put(thisSuit, suits.get(thisSuit) + 1);
+			}
+			else {
+				// create new hashmap entry with value <Suit, 1>
+				suits.put(thisSuit, 1);
+			}
+		}
+		return suits;
 	}
 }
