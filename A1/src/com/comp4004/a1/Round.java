@@ -1,5 +1,6 @@
 package com.comp4004.a1;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Round {
@@ -105,12 +106,25 @@ public class Round {
 		if(c.length == 0)
 			return false;
 		
+		// check that all suits are the same
 		Suit initialSuit = c[0].suit;
+
 		for(int i = 1; i < c.length; ++i) {
 			if(c[i].suit != initialSuit) {
 				return false;
 			}
 		}
-		return true;
+		
+		// sort highest card number first
+		Arrays.sort(c);
+
+		if((c[0].cardNum == CardNum.ACE) &&
+		   (c[1].cardNum == CardNum.KING) &&
+		   (c[2].cardNum == CardNum.QUEEN) &&
+		   (c[3].cardNum == CardNum.JACK) &&
+		   (c[4].cardNum == CardNum.TEN))
+		   return true;
+		else
+			return false;
 	}
 }

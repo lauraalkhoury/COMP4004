@@ -1,6 +1,6 @@
 package com.comp4004.a1;
 
-public class Card {
+public class Card implements Comparable<Card>{
 	private String  name;
 	private boolean inUse;
 	public  CardNum cardNum;
@@ -94,5 +94,13 @@ public class Card {
 		default:
 			return null;
 		}
+	}
+
+	@Override
+	public int compareTo(Card compareCard) {
+		CardNum compareCardNum = ((Card) compareCard).cardNum; 
+		
+		//descending order
+		return compareCardNum.getValue() - this.cardNum.getValue();
 	}
 }
