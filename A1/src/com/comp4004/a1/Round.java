@@ -151,8 +151,7 @@ public class Round {
 		else {
 			Arrays.sort(cards);
 			Card highCard = cards[0];
-			System.out.println("highCard: " + highCard.getName());
-		
+			
 			return 24 - highCard.cardNum.getValue(); // high card (24 - card value [see CardNum class])
 		}
 	}
@@ -161,13 +160,11 @@ public class Round {
 		ArrayList<Integer> scores = new ArrayList<Integer>();
 		
 		for(HashMap.Entry<Integer, Card[]> entry : hands.entrySet()) {
-		    int    playerID    = entry.getKey();
 		    Card[] playerCards = entry.getValue();
 		    
 		    // rank each player's score and add to hashmap
 		    int thisScore = rankHand(playerCards);
 		    scores.add(thisScore);
-		    System.out.println("playerID: " + playerID + ", score " + thisScore + " for hand " + Arrays.toString(playerCards));
 		}
 		playerRanking = scores;
 	}
@@ -177,25 +174,18 @@ public class Round {
 	public ArrayList<String> getResultsDescending() {
 		
 		ArrayList<String> results = new ArrayList<String>();
-		System.out.println(playerRanking);
 		// find the highest rank in hashmap, add to final results
 		ArrayList<Integer> playerRankingCopy = new ArrayList<Integer>(playerRanking);
 
 		
-		for(int i = playerRankingCopy.size()-1; i >= 0; --i) {
-			System.out.println("i = " + i);
-			System.out.println("size: " + playerRankingCopy.size());
-			
+		for(int i = playerRankingCopy.size()-1; i >= 0; --i) {			
 			int indexWithHighRank = 0;
 			int highRank          = 0;
 			
 			for(int j = playerRankingCopy.size()-1; j >= 0; --j) {
-				System.out.println("j = " + j);
-				System.out.println(playerRankingCopy.get(j));
 			    int rank = playerRankingCopy.get(j);
 			    
 			    if(rank > highRank) {
-			    	System.out.println("new High Rank is " + rank);
 			    	indexWithHighRank = j;
 			    	highRank          = rank;
 			    }
@@ -205,7 +195,6 @@ public class Round {
 			results.add("Player ID: " + playerID + ", Cards: " + Arrays.toString(hands.get(playerID)) + ", Rank: " + highRank);
 		    playerRankingCopy.remove(indexWithHighRank);
 		}
-		System.out.println(playerRanking);
 		return results;
 	}
 	

@@ -9,14 +9,5 @@ public class TestGame extends TestCase {
 		
 		g.playRound();
 		int np = g.r.numPlayers;
-		System.out.println(np);
-		
-		boolean validNumPlayers;
-		if(np < 2 || np > 4)
-			validNumPlayers = false;
-		else
-			validNumPlayers = true;
-		
-		assertEquals(validNumPlayers, true);
 	}
 }

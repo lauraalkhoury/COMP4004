@@ -378,7 +378,6 @@ public class TestRound extends TestCase {
 		// ranks will be in reverse order as they appear above because ranking is evaluated in the order of playerID
 		// ie. id=1, rank=4; id=2,rank=3; id=3,rank=2; id=4,rank=1;
 		ArrayList<Integer> correctRanking = new ArrayList<Integer>(Arrays.asList(4, 3, 2, 1));	
-		System.out.println("player ranking: " + r.playerRanking);
 		
 		assertEquals(correctRanking, r.playerRanking);
 	}
