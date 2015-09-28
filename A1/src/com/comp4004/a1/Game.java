@@ -1,16 +1,13 @@
 package com.comp4004.a1;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Game {
-	Round r;
-
-	public void playRound() {
+	public static void main(String [ ] args) {
 		// change this value to be whatever you'd like
 		int numPlayers = 4;
 		
-		r = Round.initRound(numPlayers);
+		Round r = Round.initRound(numPlayers);
 		
 		// change these values to be whatever you'd like
 		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts");
@@ -22,6 +19,8 @@ public class Game {
 		
 		ArrayList<String> results = r.getResultsDescending();
 		
+		System.out.println(" =========== GAME RESULTS =========== ");
 		System.out.println(results.toString());
+		System.out.println(" ==================================== ");
 	}
 }
