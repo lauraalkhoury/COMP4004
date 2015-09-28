@@ -24,7 +24,7 @@ public class TestRound extends TestCase {
 		r = Round.initRound(4);
 	}
 	
-	public void testSetNumPlayers() {
+	public void testSetUp() {
 		int numPlayers = 3;
 		setUp(numPlayers);
 		assertEquals(numPlayers, r.getNumPlayers());
