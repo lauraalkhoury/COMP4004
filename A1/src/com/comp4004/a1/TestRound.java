@@ -106,21 +106,6 @@ public class TestRound extends TestCase {
 		assertEquals(addSuccess, false);
 	}
 	
-//	public void testRankHand() {
-//		setUp();
-//		
-//		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
-//		r.addHand("3 NineClubs EightClubs SevenClubs SixClubs FiveClubs");    // straight flush
-//		r.addHand("2 AceHearts AceSpades AceDiamonds AceClubs KingHearts");   // four of a kind
-//		r.addHand("1 AceHearts AceSpaces AceDiamonds KingHearts KingSpades"); // full house
-//		
-//		int[] actualRanking = r.rank();
-//		
-//		int[] correctRanking = {4, 3, 2, 1};
-//		
-//		assertEquals(correctRanking, actualRanking);
-//	}
-	
 	public void testIsAceToTenInOrder() {
 		setUp();
 		
@@ -396,6 +381,63 @@ public class TestRound extends TestCase {
 		int actualRank   = r.rankHand(cardArr);
 		
 		assertEquals(actualRank, 10);
+	}
+	
+	public void testRank() {
+		setUp();
+		
+		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
+		r.addHand("3 SixClubs FiveClubs FourClubs ThreeClubs TwoClubs");    // straight flush
+		r.addHand("2 NineHearts NineSpades NineDiamonds NineClubs KingSpades");   // four of a kind
+		r.addHand("1 AceClubs AceSpades AceDiamonds KingClubs KingDiamonds"); // full house
+				
+		HashMap<Integer, Integer> actualRanking = r.rank();
+		
+		HashMap<Integer, Integer> correctRanking = new HashMap<Integer, Integer>();
+		correctRanking.put(4, 1);
+		correctRanking.put(3, 2);
+		correctRanking.put(2, 3);
+		correctRanking.put(1, 4);		
+		
+		assertEquals(correctRanking, actualRanking);
+	}
+	
+	public void testTieRoyalFlushRank() {
+		setUp();
+		
+		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
+		r.addHand("3 AceClubs KingClubs QueenClubs JackClubs TenClubs"); // royal flush
+		r.addHand("2 NineHearts NineSpades NineDiamonds NineClubs KingSpades");   // four of a kind
+		r.addHand("1 TwoHearts TwoSpades TwoDiamonds ThreeClubs ThreeDiamonds"); // full house
+				
+		HashMap<Integer, Integer> actualRanking = r.rank();
+		
+		HashMap<Integer, Integer> correctRanking = new HashMap<Integer, Integer>();
+		correctRanking.put(4, 1);
+		correctRanking.put(3, 1);
+		correctRanking.put(2, 3);
+		correctRanking.put(1, 4);		
+		
+		assertEquals(correctRanking, actualRanking);
+	}
+	
+	public void testTieHighCardRank() {
+		setUp();
+		
+		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
+		r.addHand("3 SixClubs FiveClubs FourClubs ThreeClubs TwoClubs");    // straight flush
+		r.addHand("2 FiveHearts ThreeHearts NineDiamonds AceClubs KingSpades");   // high card
+		r.addHand("1 ThreeSpades FourDiamonds TwoDiamonds SevenSpades SixHearts"); // high card
+				
+		HashMap<Integer, Integer> actualRanking = r.rank();
+		
+		HashMap<Integer, Integer> correctRanking = new HashMap<Integer, Integer>();
+		correctRanking.put(4, 1);
+		correctRanking.put(3, 2);
+		correctRanking.put(2, 10);
+		correctRanking.put(1, 11);		
+		
+		assertEquals(correctRanking, actualRanking);
 	}
 }
 

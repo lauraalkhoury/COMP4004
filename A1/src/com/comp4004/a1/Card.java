@@ -30,6 +30,7 @@ public class Card implements Comparable<Card>{
 	public boolean createFromString(String cardName) {
 		String[] splitCardString = cardName.split("(?=\\p{Upper})");
 		if(splitCardString.length != 2) {
+			System.out.println("Error: Suit and/or card number not provided.\n" + "card: " + cardName + "\n");
 			return false;
 		}
 		
@@ -37,7 +38,12 @@ public class Card implements Comparable<Card>{
 		Suit    s  = toSuit(splitCardString[1]);
 		
 		// if either CardNum or Suit is invalid
-		if(cn == null || s == null) {
+		if(cn == null) {
+			System.out.println("Error: Invalid card number.\n" + "card: " + cardName + "\n");
+			return false;
+		}
+		if(s == null) {
+			System.out.println("Error: Invalid Suit.\n" + "card: " + cardName + "\n");
 			return false;
 		}
 		

@@ -8,9 +8,8 @@ public class Round {
 	HashMap<Integer, Card[]> hands;
 	Deck                     d;
 	
-	private Round(int p) {
-		// set number of players for this round
-		numPlayers = p;
+	private Round(int n) {
+		numPlayers = n;
 		
 		// allocate hashmap for players' hands
 		hands = new HashMap<Integer, Card[]>();
@@ -35,6 +34,7 @@ public class Round {
 	public boolean addHand(String hand) {
 		// check that hand is not empty
 		if(hand.isEmpty()) {
+			System.out.println("Error: Empty string.\n" + "hand: " + hand + "\n");
 			return false;
 		}
 		
@@ -43,6 +43,7 @@ public class Round {
 		
 		// if ID is invalid, do not add hand
 		if(!idIsValid(id)) {
+			System.out.println("Error: Invalid player ID.\n" + "hand: " + hand + "\n");
 			return false;
 		}
 				
@@ -51,12 +52,14 @@ public class Round {
 		
 		// check number of cards is valid (exactly five)
 		if((cardStrings.length) != 5) {
+			System.out.println("Error: Invalid number of cards provided.\n" + "hand: " + hand + "\n");
 			return false;
 		}
 		
 		// createCardArray checks internally that each cardString is valid
 		Card[] cards = createCardArray(cardStrings);
 		if(cards == null) {
+			System.out.println("Error: One or more invalid cards provided.\n" + "hand: " + hand + "\n");
 			return false; // one or more cardStrings was invalid
 		}
 
@@ -70,6 +73,7 @@ public class Round {
 		for(int i = 0; i < cardStrings.length; ++i) {
 			// check with deck to make sure card is not in use
 			if(d.isCardInUse(cardStrings[i])) {
+				System.out.println("Error: card is in use.\n" + "card: " + cardStrings[i] + "\n");
 				return null;
 			}
 			 Card c = new Card();
@@ -88,7 +92,7 @@ public class Round {
 	
 	public boolean idIsValid(int id) {
 		// check to see playerID is a valid number
-		if(id < 0 || id > (numPlayers-1))
+		if(id < 1 || id > numPlayers)
 			return false;
 		
 		// check that player hasn't already played
@@ -142,6 +146,19 @@ public class Round {
 			return 9; // one pair (9)
 		else
 			return 10; // high card (10)
+	}
+	
+	public HashMap<Integer, Integer> rank() {
+		HashMap<Integer, Integer> playerScores = new HashMap<Integer, Integer>();
+		
+		for(HashMap.Entry<Integer, Card[]> entry : hands.entrySet()) {
+		    int    playerID    = entry.getKey();
+		    Card[] playerCards = entry.getValue();
+		    
+		    int thisScore = rankHand(playerCards);
+		    playerScores.put(playerID, thisScore);
+		}
+		return playerScores;
 	}
 	
 	public boolean isAceToTen(Card[] cards) {
