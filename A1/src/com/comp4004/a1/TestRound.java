@@ -423,7 +423,7 @@ public class TestRound extends TestCase {
 	
 	public void testTieHighCardRank() {
 		setUp();
-		
+				
 		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
 		r.addHand("3 SixClubs FiveClubs FourClubs ThreeClubs TwoClubs");    // straight flush
 		r.addHand("2 FiveHearts ThreeHearts NineDiamonds AceClubs KingSpades");   // high card
@@ -435,7 +435,7 @@ public class TestRound extends TestCase {
 		correctRanking.put(4, 1);
 		correctRanking.put(3, 2);
 		correctRanking.put(2, 10);
-		correctRanking.put(1, 11);		
+		correctRanking.put(1, 17);
 		
 		assertEquals(correctRanking, actualRanking);
 	}

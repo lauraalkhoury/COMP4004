@@ -142,10 +142,15 @@ public class Round {
 		
 		if(pairCount == 2)
 			return 8; // two pair (8)
-		else if(pairCount == 1)
+		else if(pairCount == 1)	
 			return 9; // one pair (9)
-		else
-			return 10; // high card (10)
+		else {
+			Arrays.sort(cards);
+			Card highCard = cards[0];
+			System.out.println("highCard: " + highCard.getName());
+		
+			return 24 - highCard.cardNum.getValue(); // high card (24 - card value [see CardNum class])
+		}
 	}
 	
 	public HashMap<Integer, Integer> rank() {
