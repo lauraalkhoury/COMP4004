@@ -160,6 +160,7 @@ public class Round {
 		    int    playerID    = entry.getKey();
 		    Card[] playerCards = entry.getValue();
 		    
+		    // rank each player's score and add to hashmap
 		    int thisScore = rankHand(playerCards);
 		    playerScores.put(playerID, thisScore);
 		}
@@ -179,16 +180,6 @@ public class Round {
 		   return true;
 		else
 			return false;
-	}
-	
-	public boolean isStraightFlush(Card[] cards) {
-		// check that all suits are the same
-		HashMap<Suit, Integer> suitCount = countSuits(cards);
-		if(!suitCount.containsValue(5))
-			return false;
-		
-		// check for a consecutive streak of card numbers
-		return checkStraight(cards);
 	}
 	
 	// checks if given cards have consecutive values (after sorting)
@@ -270,6 +261,7 @@ public class Round {
 		return suits;
 	}
 	
+	// this function counts the occurrences of card numbers in a given hand of cards
 	public HashMap<CardNum, Integer> countCardNums(Card[] cards) {
 		HashMap<CardNum, Integer> cardNums = new HashMap<CardNum, Integer>();
 		
