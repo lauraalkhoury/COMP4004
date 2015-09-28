@@ -1,12 +1,16 @@
 package com.comp4004.a1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 public class Round {
-	int                      numPlayers;
-	HashMap<Integer, Card[]> hands;
-	Deck                     d;
+	int  numPlayers;
+	Deck d;
+	
+	HashMap<Integer, Card[]>  hands;
+	ArrayList<Integer>        playerRanking;
+	
 	
 	private Round(int n) {
 		numPlayers = n;
@@ -153,8 +157,8 @@ public class Round {
 		}
 	}
 	
-	public HashMap<Integer, Integer> rank() {
-		HashMap<Integer, Integer> playerScores = new HashMap<Integer, Integer>();
+	public void rank() {
+		ArrayList<Integer> scores = new ArrayList<Integer>();
 		
 		for(HashMap.Entry<Integer, Card[]> entry : hands.entrySet()) {
 		    int    playerID    = entry.getKey();
@@ -162,9 +166,47 @@ public class Round {
 		    
 		    // rank each player's score and add to hashmap
 		    int thisScore = rankHand(playerCards);
-		    playerScores.put(playerID, thisScore);
+		    scores.add(thisScore);
+		    System.out.println("playerID: " + playerID + ", score " + thisScore + " for hand " + Arrays.toString(playerCards));
 		}
-		return playerScores;
+		playerRanking = scores;
+	}
+	
+	// output results (sorted by rank in descending order) in the following format:
+	// Player ID: __, Cards: [__, __, __, __, __], Rank: __
+	public ArrayList<String> getResultsDescending() {
+		
+		ArrayList<String> results = new ArrayList<String>();
+		System.out.println(playerRanking);
+		// find the highest rank in hashmap, add to final results
+		ArrayList<Integer> playerRankingCopy = new ArrayList<Integer>(playerRanking);
+
+		
+		for(int i = playerRankingCopy.size()-1; i >= 0; --i) {
+			System.out.println("i = " + i);
+			System.out.println("size: " + playerRankingCopy.size());
+			
+			int indexWithHighRank = 0;
+			int highRank          = 0;
+			
+			for(int j = playerRankingCopy.size()-1; j >= 0; --j) {
+				System.out.println("j = " + j);
+				System.out.println(playerRankingCopy.get(j));
+			    int rank = playerRankingCopy.get(j);
+			    
+			    if(rank > highRank) {
+			    	System.out.println("new High Rank is " + rank);
+			    	indexWithHighRank = j;
+			    	highRank          = rank;
+			    }
+			}
+			
+			int playerID = playerRanking.indexOf(highRank)+1;
+			results.add("Player ID: " + playerID + ", Cards: " + Arrays.toString(hands.get(playerID)) + ", Rank: " + highRank);
+		    playerRankingCopy.remove(indexWithHighRank);
+		}
+		System.out.println(playerRanking);
+		return results;
 	}
 	
 	public boolean isAceToTen(Card[] cards) {

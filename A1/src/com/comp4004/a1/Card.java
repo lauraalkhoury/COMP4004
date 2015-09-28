@@ -109,4 +109,9 @@ public class Card implements Comparable<Card>{
 		//descending order
 		return compareCardNum.getValue() - this.cardNum.getValue();
 	}
+	
+	 @Override
+	  public String toString() {
+	    return name;
+	  }
 }

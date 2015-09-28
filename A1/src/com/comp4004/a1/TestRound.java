@@ -1,6 +1,10 @@
 package com.comp4004.a1;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+
+
 
 //TestRound.java---------------------------------
 import junit.framework.*; 
@@ -364,20 +368,19 @@ public class TestRound extends TestCase {
 	public void testRank() {
 		setUp();
 		
-		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush
-		r.addHand("3 SixClubs FiveClubs FourClubs ThreeClubs TwoClubs");    // straight flush
-		r.addHand("2 NineHearts NineSpades NineDiamonds NineClubs KingSpades");   // four of a kind
-		r.addHand("1 AceClubs AceSpades AceDiamonds KingClubs KingDiamonds"); // full house
+		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts"); // royal flush (1)
+		r.addHand("3 SixClubs FiveClubs FourClubs ThreeClubs TwoClubs");    // straight flush (2)
+		r.addHand("2 NineHearts NineSpades NineDiamonds NineClubs KingSpades");   // four of a kind (3)
+		r.addHand("1 AceClubs AceSpades AceDiamonds KingClubs KingDiamonds"); // full house (4)
 				
-		HashMap<Integer, Integer> actualRanking = r.rank();
+		r.rank();
 		
-		HashMap<Integer, Integer> correctRanking = new HashMap<Integer, Integer>();
-		correctRanking.put(4, 1);
-		correctRanking.put(3, 2);
-		correctRanking.put(2, 3);
-		correctRanking.put(1, 4);		
+		// ranks will be in reverse order as they appear above because ranking is evaluated in the order of playerID
+		// ie. id=1, rank=4; id=2,rank=3; id=3,rank=2; id=4,rank=1;
+		ArrayList<Integer> correctRanking = new ArrayList<Integer>(Arrays.asList(4, 3, 2, 1));	
+		System.out.println("player ranking: " + r.playerRanking);
 		
-		assertEquals(correctRanking, actualRanking);
+		assertEquals(correctRanking, r.playerRanking);
 	}
 	
 	public void testTieRoyalFlushRank() {
@@ -388,15 +391,11 @@ public class TestRound extends TestCase {
 		r.addHand("2 NineHearts NineSpades NineDiamonds NineClubs KingSpades");   // four of a kind
 		r.addHand("1 TwoHearts TwoSpades TwoDiamonds ThreeClubs ThreeDiamonds"); // full house
 				
-		HashMap<Integer, Integer> actualRanking = r.rank();
+		r.rank();
 		
-		HashMap<Integer, Integer> correctRanking = new HashMap<Integer, Integer>();
-		correctRanking.put(4, 1);
-		correctRanking.put(3, 1);
-		correctRanking.put(2, 3);
-		correctRanking.put(1, 4);		
+		ArrayList<Integer> correctRanking = new ArrayList<Integer>(Arrays.asList(4, 3, 1, 1));	
 		
-		assertEquals(correctRanking, actualRanking);
+		assertEquals(correctRanking, r.playerRanking);
 	}
 	
 	public void testTieHighCardRank() {
@@ -407,15 +406,32 @@ public class TestRound extends TestCase {
 		r.addHand("2 FiveHearts ThreeHearts NineDiamonds AceClubs KingSpades");   // high card
 		r.addHand("1 ThreeSpades FourDiamonds TwoDiamonds SevenSpades SixHearts"); // high card
 				
-		HashMap<Integer, Integer> actualRanking = r.rank();
+		r.rank();
 		
-		HashMap<Integer, Integer> correctRanking = new HashMap<Integer, Integer>();
-		correctRanking.put(4, 1);
-		correctRanking.put(3, 2);
-		correctRanking.put(2, 10);
-		correctRanking.put(1, 17);
+		ArrayList<Integer> correctRanking = new ArrayList<Integer>(Arrays.asList(17, 10, 2, 1));
 		
-		assertEquals(correctRanking, actualRanking);
+		assertEquals(correctRanking, r.playerRanking);
+	}
+	
+	public void testGetResultsDescending() {
+		setUp();
+		
+		r.addHand("4 AceHearts KingHearts QueenHearts JackHearts TenHearts");
+		r.addHand("3 SixClubs FiveClubs FourClubs ThreeClubs TwoClubs");
+		r.addHand("2 NineHearts NineSpades NineDiamonds NineClubs KingSpades");
+		r.addHand("1 AceClubs AceSpades AceDiamonds KingClubs KingDiamonds");
+		
+		r.rank();
+		
+		ArrayList<String> actualResults   = r.getResultsDescending();
+		
+		ArrayList<String> expectedResults = new ArrayList<String>();
+		expectedResults.add("Player ID: 1, Cards: [AceClubs, AceSpades, AceDiamonds, KingClubs, KingDiamonds], Rank: 4");
+		expectedResults.add("Player ID: 2, Cards: [NineHearts, NineSpades, NineDiamonds, NineClubs, KingSpades], Rank: 3");
+		expectedResults.add("Player ID: 3, Cards: [SixClubs, FiveClubs, FourClubs, ThreeClubs, TwoClubs], Rank: 2");
+		expectedResults.add("Player ID: 4, Cards: [AceHearts, KingHearts, QueenHearts, JackHearts, TenHearts], Rank: 1");
+		
+		assertEquals(actualResults, expectedResults);
 	}
 }
 
